@@ -9,17 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "@trigger.dev/sdk": "^3.3.17",
+    "i18next": "^25.1.1",
+    "i18next-fs-backend": "^2.6.0",
+    "luxon": "^3.6.1",
+    "next": "15.3.1",
+    "openai": "^4.97.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.2"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@trigger.dev/build": "^3.3.17",
+    "@types/luxon": "^3.6.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.2",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-next": "15.3.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

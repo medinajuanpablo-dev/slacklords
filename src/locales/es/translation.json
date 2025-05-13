@@ -1,0 +1,74 @@
+{
+  "notification": {
+    "confirmSetup": "✅ Daily Boxy se estableció para las {{time}} AM en este canal como '{{projectName}}'. Todos los participantes van a recibir un mensaje en ese horario para completar la daily. ¡Acordate de responder! 🙂",
+    "updatedSetup": "✅ Daily Boxy se actualizó para las {{time}} AM en este canal como '{{projectName}}'. Desde ahora el mensaje va a llegar a esa hora. ¡Acordate de responder! 🙂",
+    "deletedConfig": "✅ Daily Boxy fue eliminado de este canal. No se enviarán más reportes acá.",
+    "reportRejected": "❌ *Daily cerrada*. Los reportes para '{{projectName}}' ya terminaron por hoy.",
+    "reportSubmitted": "✅ *Reporte recibido*. ¡Gracias! Podés actualizarlo enviándolo de nuevo.",
+    "reportUpdated": "✅ *Reporte actualizado exitosamente*. Podés volver a actualizarlo si querés.",
+    "dailyClosed": "🙌 *Daily cerrada*. Los reportes para '{{projectName}}' terminaron por hoy. ¡Gracias por tus respuestas!"
+  },
+  "form": {
+    "setup": {
+      "titleNew": "*👋 ¡Hola!* Vamos a configurar Daily Boxy para este canal",
+      "titleUpdate": "*¡Actualizando!* Esto va a sobrescribir la configuración actual para este canal",
+      "subTitle": "_⚠ Todos los campos son obligatorios_",
+      "projectNameField": {
+        "label": "Nombre del proyecto"
+      },
+      "participantsField": {
+        "label": "Participantes seleccionados (miembros del canal seleccionados por defecto)",
+        "placeholder": "Elegí usuaries"
+      },
+      "languageField": {
+        "placeholder": "Elegí el idioma",
+        "option0": "Español",
+        "option1": "Inglés"
+      },
+      "timeField": {
+        "placeholder": "Horario del daily"
+      },
+      "submitButton": {
+        "text": "Confirmar"
+      },
+      "deleteButton": {
+        "text": "Eliminar la configuración de este canal",
+        "confirmationModal": {
+          "title": "¿Estás seguro?",
+          "subTitle": "Esto va a eliminar la configuración actual de la daily para este canal.",
+          "confirmButtonText": "Sí, eliminar",
+          "cancelButtonText": "Cancelar"
+        }
+      }
+    },
+    "daily": {
+      "title": "*🤖 ¡Hola! Completá tu daily para '{{projectName}}':*",
+      "subTitle": "_La daily va a estar abierta por 2 horas_",
+      "yesterdayField": {
+        "label": "¿En qué estuviste ayer?"
+      },
+      "todayField": {
+        "label": "¿En qué vas a trabajar hoy?"
+      },
+      "blockersField": {
+        "label": "¿Tenés algún bloqueo?"
+      },
+      "submitButton": {
+        "text": "Enviar"
+      }
+    }
+  },
+  "reportsList": {
+    "title": "📆 *¡Daily finalizada!* Acá están los reportes para '{{projectName}}':"
+  },
+  "aiSummary": {
+    "title": "🧠🤖 *Resumen de hoy:*"
+  },
+  "userReport": {
+    "title": "*Reporte de Daily de <@{{userId}}>*",
+    "yesterday": "*✅ Ayer:*\n{{yesterday}}",
+    "today": "*📅 Hoy:*\n{{today}}",
+    "blockers": "*🚧 Bloqueos:*\n{{blockers}}",
+    "noAnswer": "_Sin respuesta_"
+  }
+}

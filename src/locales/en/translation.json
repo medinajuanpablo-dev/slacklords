@@ -1,0 +1,74 @@
+{
+  "notification": {
+    "confirmSetup": "✅ Daily Boxy was set up for {{time}} AM in this channel as project '{{projectName}}'. All participants will receive a message at that time asking for a daily report. Please answer :)",
+    "updatedSetup": "✅ Daily Boxy has been changed to {{time}} AM in this channel as project '{{projectName}}'. Message will arrive at that time from now on. Please answer :)",
+    "deletedConfig": "✅ Daily Boxy has been removed from this channel. No more reports here.",
+    "reportRejected": "❌ *Daily Finished*. Last daily reports for '{{projectName}}' are closed.",
+    "reportSubmitted": "✅ *Report received*. Thank you! You can update it by sending it again.",
+    "reportUpdated": "✅ *Report updated successfully*. You may update it again if needed.",
+    "dailyClosed": "🙌 *Daily Finished!* Reports for '{{projectName}}' are closed now. Thank you for your answers today!"
+  },
+  "form": {
+    "setup": {
+      "titleNew": "*👋 Hi!* Let's set up Daily Boxy for this channel",
+      "titleUpdate": "*Updating!* This will overwrite the current config for this channel",
+      "subTitle": "_⚠ All fields are required_",
+      "projectNameField": {
+        "label": "Project Name"
+      },
+      "participantsField": {
+        "label": "Selected participants (channel members selected by default)",
+        "placeholder": "Select users"
+      },
+      "languageField": {
+        "placeholder": "Select language",
+        "option0": "Español",
+        "option1": "English"
+      },
+      "timeField": {
+        "placeholder": "Time of the daily"
+      },
+      "submitButton": {
+        "text": "Confirm"
+      },
+      "deleteButton": {
+        "text": "Delete this channel's config",
+        "confirmationModal": {
+          "title": "Are you sure?",
+          "subTitle": "This will delete the current daily config for this channel.",
+          "confirmButtonText": "Yes, delete it",
+          "cancelButtonText": "Cancel"
+        }
+      }
+    },
+    "daily": {
+      "title": "*🤖 Hi! Please fill out your daily for '{{projectName}}':*",
+      "subTitle": "_Daily will be open for 3 hours_",
+      "yesterdayField": {
+        "label": "What did you work on yesterday?"
+      },
+      "todayField": {
+        "label": "What will you work on today?"
+      },
+      "blockersField": {
+        "label": "Any blockers?"
+      },
+      "submitButton": {
+        "text": "Submit"
+      }
+    }
+  },
+  "reportsList": {
+    "title": "📆 *Daily Finished!*. Here are the reports for '{{projectName}}':"
+  },
+  "aiSummary": {
+    "title": "🧠🤖 *Today's Summary:*"
+  },
+  "userReport": {
+    "title": "*<@{{userId}}>'s Daily Report*",
+    "yesterday": "*✅ Yesterday:*\n{{yesterday}}",
+    "today": "*📅 Today:*\n{{today}}",
+    "blockers": "*🚧 Blockers:*\n{{blockers}}",
+    "noAnswer": "_No answer_"
+  }
+}
