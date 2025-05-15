@@ -26,7 +26,7 @@ export type SupabaseCharacter = {
   story: string;
   hearts: number;
   stats: {
-    hit_points: number;
+    vitality: number;
     attack: number;
     defense: number;
     speed: number;
@@ -40,4 +40,10 @@ export type SupabaseCharacter = {
   };
   inventory: SupabaseItem[];
   is_available: boolean;
+};
+
+export type GeneratedCharacterData = {
+  name: string;
+  story: string;
+  stats: { vitality: number; attack: number; defense: number; speed: number; luck: number };
 };

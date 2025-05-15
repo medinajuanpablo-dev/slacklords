@@ -1,57 +1,70 @@
-export const GENERATE_REPORTS_SUMMARY_PROMPT = `
-Act as an assistant to generate a summary of individual dailies provided by a team via Slack.
+export const GENERATE_CHARACTER_PROMPT = `
+  Sos un asistente que ayuda a crear personajes divertidos para un juego simple en Slack. 
+  
+  Tu tarea es crear un personaje completamente nuevo en formato JSON. Constrúyele un nombre y una historia. La historia debe tener 
+  altibajos y ser emocionante y atrapante. La historia debe mostrar personalidad, fortalezas y debilidades.
+  
+  Además, tienes que distribuir N stat points entre los stats basado creativamente en la historia y nombre del personaje.
+  Elige N entre 30 y 50 según que tan fuerte sea el personaje.
 
----
+  ## SINTAXIS DE RESPUESTA
 
-## WHAT YOU WILL RECEIVE:
+  {
+    name: string;
+    story: string;
+    stats: {
+      vitality: number;
+      attack: number;
+      defense: number;
+      speed: number;
+      luck: number;
+    };
+  }
 
-You will receive each team member’s responses in JSON format with the following properties:
+  ## EJEMPLOS DE PERSONAJES
 
-userId: the Slack user ID of the member
-yesterday: string with what they did yesterday
-today: string with what they plan to do today
-blockers: string with obstacles or issues
+  {
+    name: 'Mad Chef',
+    story: 'Un chef gigantesco y temible que solía ser el cocinero real hasta que la obsesión por crear el plato perfecto lo llevó a la locura. Ahora deambula por las cocinas con su cuchillo ceremonial perfectamente afilado, capaz de cortar cualquier cosa que se interponga en su camino. Su enorme masa corporal lo hace increíblemente resistente, pero también extremadamente lento y torpe. Los rumores dicen que nadie ha sobrevivido a probar sus "creaciones culinarias".',
+    stats: {
+      vitality: 15,
+      attack: 15,
+      defense: 10,
+      speed: 2,
+      luck: 3,
+    },
+  }
 
-## YOUR TASK:
+  {
+    name: 'Agustin',
+    story: 'Un joven de 20 años que se dedica a la carpintería. Es un hombre trabajador y responsable, pero también es un poco torpe y poco afortunado. Su vida es un poco aburrida, pero siempre está buscando algo nuevo y emocionante para hacer.',
+    stats: {
+      vitality: 5,
+      attack: 5,
+      defense: 5,
+      speed: 12,
+      luck: 3,
+    },
+  }
 
-Your task is to generate a brief and clear group summary to share in a Slack channel. Use a professional yet friendly tone. Structure your response like this:
+  {
+    name: 'Víbora Fea',
+    story: 'Una víbora fea y mala que vive en el desierto. Es muy agresiva y tiene enormes colmillos afilados. La carencia de extremidades la hace bastante lenta igual.',
+    stats: {
+      vitality: 10,
+      attack: 20,
+      defense: 5,
+      speed: 2,
+      luck: 5,
+    },
+  }
 
-✅ *Summary of Yesterday*
-🗓️ *Plans for Today*
-🚧 *Important Blockers*
-📌 *Key Notes* (only if applicable)
-🔴 *No Responses* (only if someone didn’t reply)
+  ## CONSIDERACIONES
 
-Within each section, list items by userId, starting with a user tag -> that is, starting with <@userId>.
-
-## EXAMPLE / EXPECTED OUTPUT:
-
-Expected format example:
-
-✅ *Summary of Yesterday*
-• <@U1111> completed onboarding design.
-• <@U1112> fixed bugs in the payment system.
-
-🗓️ *Plans for Today*
-• <@U1111> will test the new user flow.
-• <@U1112> will work on Stripe integration.
-
-🚧 *Important Blockers*
-• <@U1111> needs client feedback to move forward.
-
-📌 *Key Notes*
-• Sprint delivery is scheduled for Thursday.
-
-🔴 *No Responses*
-<@U1113>
-<@U1114>
-
-## CONSIDERATIONS:
-
-- Each user’s summary should not exceed 30 words. 
-- Don’t repeat unnecessary text. 
-- If there are many blockers, highlight them.
-- Never place the same user more than once in the same section.
+  - El personaje debe tener un nombre e historia creativos y originales.
+  - Los stats deben estar MUY FUERTEMENTE influidos por la historia y el nombre del personaje.
+  - No temer ir a los extremos con los stats tanto para arriba como para abajo, pero tampoco siempre ir a los extremos.
+  - No irse demasiado de las ramas con las historias, mantenerlas coherentes y siguiendo una sola línea.
 `;
 
 export const LANGUAGE_PROMPT_ADDITION: Record<string, string> = {
