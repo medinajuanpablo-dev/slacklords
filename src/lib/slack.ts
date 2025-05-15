@@ -83,3 +83,22 @@ export async function deleteSlackMessage(channel: string, ts: string): Promise<a
 
   return data;
 }
+
+export async function sendResponse(responseUrl: string, body: any) {
+  const res = await fetch(responseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  const data = await res.json();
+
+  if (!data.ok) {
+    console.error('❌ Error sending response to Slack:', data.error);
+    throw new Error(data.error);
+  }
+
+  return data;
+}

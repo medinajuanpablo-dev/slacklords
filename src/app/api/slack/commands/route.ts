@@ -1,26 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parse } from 'querystring';
-import { IS_DEVELOPMENT } from '@/constants/constants';
-import handleSetupCommand from './setup';
-import { handleVersionCommand } from './version';
+import setBattlefield from './setBattlefield';
+import viewOrCreateCharacter from './viewOrCreateCharacter';
+import deleteBattlefield from './deleteBattlefield';
+
+const UNRECOGNIZED_RESPONSE = NextResponse.json({
+  response_type: 'ephemeral',
+  text: 'Unrecognized command.',
+});
 
 export async function POST(req: NextRequest) {
   const bodyText = await req.text();
   const body = parse(bodyText);
 
   const command = body.command as string;
+  const argument = body.text as string;
   const userId = body.user_id as string;
   const channelId = body.channel_id as string;
 
-  console.log('Received command', { command, userId, channelId });
+  console.log('Received command', { command, userId, channelId, body });
 
-  if (command === '/setup-dailybot' || (IS_DEVELOPMENT && command === '/dev-boxy-standup-add-config'))
-    return handleSetupCommand(command, userId, channelId);
+  if (command !== '/slacklords') return UNRECOGNIZED_RESPONSE;
 
-  if (command == '/dailybot-version' || (IS_DEVELOPMENT && command == '/dev-boxy-standup-version')) return handleVersionCommand();
+  switch (argument) {
+    case 'battlefield set':
+      return setBattlefield(channelId);
+    case 'battlefield delete':
+      return deleteBattlefield(channelId);
+    case 'character':
+      return viewOrCreateCharacter(userId, channelId);
 
-  return NextResponse.json({
-    response_type: 'ephemeral',
-    text: 'Comando no reconocido.',
-  });
+    default:
+      return UNRECOGNIZED_RESPONSE;
+  }
 }

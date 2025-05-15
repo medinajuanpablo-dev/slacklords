@@ -1,17 +1,5 @@
-import { HOLIDAYS } from '@/constants/constants';
-import { DateTime } from 'luxon';
+import { NextResponse } from 'next/server';
 
-export function convertLocalTimeToUTC(localTime: string, userTimezone: string): string {
-  const [hours, minutes] = localTime.split(':').map(Number);
-  const local = DateTime.fromObject({ hour: hours, minute: minutes }, { zone: userTimezone });
-  return local.toUTC().toFormat('HH:mm');
-}
-
-export function isHoliday(date: Date): boolean {
-  const year = date.getFullYear();
-  const holidays = HOLIDAYS[year];
-  if (!holidays) throw new Error(`No holidays found for year ${year}`);
-
-  const dateString = date.toISOString().split('T')[0];
-  return holidays?.has(dateString) ?? false;
+export function respondEphemeral(text: string) {
+  return NextResponse.json({ response_type: 'ephemeral', text });
 }
