@@ -5,19 +5,19 @@ export default async function handleDeleteBattlefield(channelId: string, actionI
   console.log('Handling delete battlefield for channel', { channelId, actionId });
 
   if (actionId === 'cancel-delete-battlefield')
-    return sendSlackResponse(responseUrl, { replace_original: 'true', text: 'Battlefield deletion cancelled.' });
+    return sendSlackResponse(responseUrl, { replace_original: 'true', text: 'Eliminación de campo de batalla cancelada.' });
 
   if (actionId === 'confirm-delete-battlefield') {
     const { error } = await removeBattlefield(channelId);
 
-    if (error) return sendSlackResponse(responseUrl, { replace_original: 'true', text: 'Error deleting battlefield.' });
+    if (error) return sendSlackResponse(responseUrl, { replace_original: 'true', text: 'Error al eliminar el campo de batalla.' });
 
     postSlackMessage({
       channel: channelId,
       blocks: [
         {
           type: 'section',
-          text: { type: 'mrkdwn', text: '*Battlefield deleted from this channel.* No more battles here :(' },
+          text: { type: 'mrkdwn', text: '*Campo de batalla eliminado de este canal.* No más batallas aquí :(' },
         },
       ],
     });

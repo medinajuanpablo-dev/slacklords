@@ -3,7 +3,8 @@ import { askAssitant } from '@/lib/openai';
 import { postSlackEphemeral, postSlackMessage } from '@/lib/slack';
 import { getBattlefield, getCharacter, createCharacter } from '@/lib/supabase';
 import { respondEphemeral } from '@/lib/utils';
-import { GeneratedCharacterData } from '@/types/types';
+import { GeneratedCharacterData, SupabaseCharacter } from '@/types/types';
+import { NextResponse } from 'next/server';
 
 async function generateAndCreateCharacter(userId: string, channelId: string, battlefieldId: string) {
   const response = await askAssitant(GENERATE_CHARACTER_PROMPT);
@@ -11,7 +12,7 @@ async function generateAndCreateCharacter(userId: string, channelId: string, bat
     postSlackEphemeral({
       channel: channelId,
       user: userId,
-      text: 'Error generating character',
+      text: 'Error al generar el personaje',
     });
 
   const character = JSON.parse(response!.replaceAll('```json', '').replaceAll('```', '')) as GeneratedCharacterData;
@@ -23,13 +24,13 @@ async function generateAndCreateCharacter(userId: string, channelId: string, bat
     postSlackEphemeral({
       channel: channelId,
       user: userId,
-      text: 'Error creating character',
+      text: 'Error al crear el personaje',
     });
 
   postSlackEphemeral({
     channel: channelId,
     user: userId,
-    text: 'Character created successfully.',
+    text: 'Personaje creado! Para ver tu personaje, usa `/slacklords character`.',
   });
 
   postSlackMessage({
@@ -56,27 +57,84 @@ async function generateAndCreateCharacter(userId: string, channelId: string, bat
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Stats*\n• Vitalidad: ${character.stats.vitality}\n• Ataque: ${character.stats.attack}\n• Defensa: ${character.stats.defense}\n• Velocidad: ${character.stats.speed}\n• Suerte: ${character.stats.luck}`,
+          text: `*Stats*
+          • Vitalidad: ${character.stats.vitality}
+          • Ataque: ${character.stats.attack}
+          • Defensa: ${character.stats.defense}
+          • Velocidad: ${character.stats.speed}
+          • Suerte: ${character.stats.luck}`,
         },
       },
     ],
   });
 }
 
-async function respondCharacterView(userId: string, battlefieldId: string, character: SupabaseCharacter) {}
+async function respondCharacterView(character: SupabaseCharacter) {
+  return NextResponse.json({
+    response_type: 'ephemeral',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `Perfil de *${character.name}*`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Stats*
+          • Vitalidad: ${character.stats.vitality}
+          • Ataque: ${character.stats.attack}
+          • Defensa: ${character.stats.defense}
+          • Velocidad: ${character.stats.speed}
+          • Suerte: ${character.stats.luck}`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: 'Para ver el equipo o la historia, usa `/slacklords character story`.',
+        },
+      },
+    ],
+  });
+}
 
-export default async function viewOrCreateCharacter(userId: string, channelId: string) {
+async function respondCharacterStory(character: SupabaseCharacter) {
+  return NextResponse.json({
+    response_type: 'ephemeral',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Historia de ${character.name}*
+          
+          ${character.story}`,
+        },
+      },
+    ],
+  });
+}
+
+export default async function viewOrCreateCharacter(userId: string, channelId: string, argument: string) {
   const { data: battlefield, error } = await getBattlefield(channelId);
-  if (error) return respondEphemeral('Error getting battlefield');
-  if (!battlefield) return respondEphemeral('No battlefield found. Please set a battlefield first.');
+  if (error) return respondEphemeral('Error para obtener el campo de batalla');
+  if (!battlefield) return respondEphemeral('No se encontró un campo de batalla. Por favor, configura un campo de batalla primero.');
 
   const { data: character, error: getError } = await getCharacter(userId, battlefield.id);
-  if (getError) return respondEphemeral('Error getting character.');
+  if (getError) return respondEphemeral('Error para obtener el personaje.');
 
   if (!character) {
     generateAndCreateCharacter(userId, channelId, battlefield.id);
-    return respondEphemeral('No character found. Creating character...');
+    return respondEphemeral('No se encontró un personaje. Creando personaje...');
   }
 
-  return await respondCharacterView(userId, battlefield.id, character);
+  if (argument === 'story') return await respondCharacterStory(character);
+  if (!argument) return await respondCharacterView(character);
+
+  return respondEphemeral('Argumento no reconocido. Por favor, usa `/slacklords character` para ver tu personaje.');
 }

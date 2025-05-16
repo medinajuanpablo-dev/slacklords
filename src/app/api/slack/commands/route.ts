@@ -3,10 +3,12 @@ import { parse } from 'querystring';
 import setBattlefield from './setBattlefield';
 import viewOrCreateCharacter from './viewOrCreateCharacter';
 import deleteBattlefield from './deleteBattlefield';
+import manageEquipment from './manageEquipment';
+import manageHelp from './manageHelp';
 
 const UNRECOGNIZED_RESPONSE = NextResponse.json({
   response_type: 'ephemeral',
-  text: 'Unrecognized command.',
+  text: 'Comando no reconocido. Por favor, usa `/slacklords help` para ver los comandos disponibles.',
 });
 
 export async function POST(req: NextRequest) {
@@ -14,7 +16,7 @@ export async function POST(req: NextRequest) {
   const body = parse(bodyText);
 
   const command = body.command as string;
-  const argument = body.text as string;
+  const [firstArgument, secondArgument] = (body.text as string).split(' ');
   const userId = body.user_id as string;
   const channelId = body.channel_id as string;
 
@@ -22,13 +24,18 @@ export async function POST(req: NextRequest) {
 
   if (command !== '/slacklords') return UNRECOGNIZED_RESPONSE;
 
-  switch (argument) {
+  switch (firstArgument) {
     case 'battlefield set':
       return setBattlefield(channelId);
     case 'battlefield delete':
       return deleteBattlefield(channelId);
     case 'character':
-      return viewOrCreateCharacter(userId, channelId);
+      return viewOrCreateCharacter(userId, channelId, secondArgument);
+    case 'equipment':
+      return manageEquipment(userId, channelId);
+
+    case 'help':
+      return manageHelp();
 
     default:
       return UNRECOGNIZED_RESPONSE;
