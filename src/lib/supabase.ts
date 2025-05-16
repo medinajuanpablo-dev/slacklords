@@ -1,13 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import { BASE_EQUIPMENT, BASE_HEARTS, SUPABASE_ANON_KEY, SUPABASE_URL } from '@/constants/constants';
-import { GeneratedCharacterData, SupabaseBattlefield, SupabaseCharacter, SupabaseItem } from '@/types/types';
+import { GeneratedCharacterData, StoreItems, SupabaseBattlefield, SupabaseCharacter, SupabaseItem } from '@/types/types';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export async function createBattlefield(channelId: string) {
   console.log('Creating battlefield for channel', { channelId });
 
-  const data = { channel_id: channelId };
+  const data = { channel_id: channelId, store: { items: [], last_updated: new Date().toUTCString() } };
 
   const { error } = await supabase.from('battlefields').insert([data]);
 
@@ -95,6 +95,25 @@ export async function addItemsToDatabase(items: Partial<SupabaseItem>[]) {
   const { error } = await supabase.from('items').insert(items);
 
   if (error) console.error('Error adding items to database', { error });
+
+  return { error };
+}
+
+export async function getItems() {
+  const { data, error } = await supabase.from('items').select('*');
+
+  if (error) console.error('Error getting items', { error });
+
+  return { data: data as SupabaseItem[], error };
+}
+
+export async function updateBattlefieldStore(battlefieldId: string, newItems: StoreItems[]) {
+  const { error } = await supabase
+    .from('battlefields')
+    .update({ store: { items: newItems, last_updated: new Date().toUTCString() } })
+    .eq('id', battlefieldId);
+
+  if (error) console.error('Error updating battlefield store', { error });
 
   return { error };
 }

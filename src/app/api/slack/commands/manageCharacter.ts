@@ -74,52 +74,48 @@ async function respondCharacterView(character: SupabaseCharacter) {
     response_type: 'ephemeral',
     blocks: [
       {
+        type: 'divider',
+      },
+      {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `Perfil de *${character.name}*`,
+          text: `Tu personaje: *${character.name}*`,
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Stats*`,
+          text: `❤️ *Vitalidad*: ${character.stats.vitality}\n_Aguantás más daño en los combates_`,
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `❤️ *Vitalidad*: ${character.stats.vitality}`,
+          text: `💥 *Ataque*: ${character.stats.attack}\n_Hacés más daño en los combates_`,
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `💥 *Ataque*: ${character.stats.attack}`,
+          text: `🛡️ *Defensa*: ${character.stats.defense}\n_Reduce el daño que recibís en los combates_`,
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `🛡️ *Defensa*: ${character.stats.defense}`,
+          text: `🏃 *Velocidad*: ${character.stats.speed}\n_Quién ataca primero y cuántos ataques hacés por turno_`,
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `🏃 *Velocidad*: ${character.stats.speed}`,
-        },
-      },
-      {
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: `🍀 *Suerte*: ${character.stats.luck}`,
+          text: `🍀 *Suerte*: ${character.stats.luck}\n_Aumenta la probabilidad de ataques críticos x3 de daño_`,
         },
       },
     ],

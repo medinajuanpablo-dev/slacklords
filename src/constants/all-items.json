@@ -9,7 +9,7 @@
   },
   {
     "name": "Un palo de la calle",
-    "description": "Un palo de la calle. No, no puede resistirse a la tentación de levantarlo",
+    "description": "Un palo de la calle. No, uno no puede resistirse a la tentación de levantarlo",
     "effect_data": {
       "type": "weapon",
       "modifying_stats_values": {

@@ -13,3 +13,20 @@ export const BASE_EQUIPMENT = {
   weapon: null,
   jewel: null,
 };
+
+export const TYPES_EMOJIES = {
+  helmet: '🪖',
+  armor: '🛡️',
+  weapon: '🗡️',
+  jewel: '💍',
+  consumable: '🍎',
+  accessory: '🪛',
+};
+
+export const STATS_EMOJIES = {
+  vitality: '❤️',
+  attack: '💥',
+  defense: '🛡️',
+  speed: '🏃',
+  luck: '🍀',
+};

@@ -2,11 +2,16 @@ export type SupabaseBattlefield = {
   id: string;
   created_at: string;
   channel_id: string;
-  store_items: {
-    item: SupabaseItem;
-    quantity: number;
-    price: number;
-  }[];
+  store: {
+    last_updated: string;
+    items: StoreItems[];
+  };
+};
+
+export type StoreItems = {
+  item: SupabaseItem;
+  quantity: number;
+  price: number;
 };
 
 export enum ItemType {
@@ -26,7 +31,6 @@ export type SupabaseItem = {
   effect_data: {
     type: ItemType;
     modifying_stats_values?: Record<CharacterStat, number>;
-    modifying_stats_percentage?: Record<CharacterStat, number>;
     hearts_addition?: number;
     duration_days?: number; // Only for consumables
   };
@@ -58,6 +62,7 @@ export type SupabaseCharacter = {
   };
   inventory: SupabaseItem[];
   is_available: boolean;
+  gold: number;
 };
 
 export type GeneratedCharacterData = {
