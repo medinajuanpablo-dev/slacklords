@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from 'next/server';
 import { parse } from 'querystring';
 import handleDeleteBattlefield from './deleteBattlefield';
+import handleDeleteCharacter from './handleDeleteCharacter';
 
 export async function POST(req: NextRequest) {
   const bodyText = await req.text();
@@ -16,6 +16,9 @@ export async function POST(req: NextRequest) {
   if (payload.type === 'block_actions') {
     if (actionId.includes('delete-battlefield')) {
       return await handleDeleteBattlefield(payload.channel.id, actionId, payload.response_url);
+    }
+    if (actionId.includes('delete-character')) {
+      return await handleDeleteCharacter(payload.channel.id, actionId, payload.response_url);
     }
   }
 

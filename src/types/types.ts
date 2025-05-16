@@ -36,7 +36,8 @@ export type SupabaseCharacter = {
     helmet: SupabaseItem;
     armor: SupabaseItem;
     weapon: SupabaseItem;
-    jewel: SupabaseItem;
+    jewel1: SupabaseItem;
+    jewel2: SupabaseItem;
   };
   inventory: SupabaseItem[];
   is_available: boolean;

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parse } from 'querystring';
 import setBattlefield from './setBattlefield';
-import viewOrCreateCharacter from './viewOrCreateCharacter';
+import manageCharacter from './manageCharacter';
 import deleteBattlefield from './deleteBattlefield';
 import manageEquipment from './manageEquipment';
 import manageHelp from './manageHelp';
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     case 'battlefield delete':
       return deleteBattlefield(channelId);
     case 'character':
-      return viewOrCreateCharacter(userId, channelId, secondArgument);
+      return manageCharacter(userId, channelId, secondArgument);
     case 'equipment':
       return manageEquipment(userId, channelId);
 

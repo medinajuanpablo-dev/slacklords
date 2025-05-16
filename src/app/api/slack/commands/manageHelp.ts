@@ -14,6 +14,7 @@ export default async function manageHelp() {
             '• `/slacklords battlefield delete` - Elimina el campo de batalla del canal actual\n' +
             '• `/slacklords character` - Crea un personaje o muestra tu personaje actual\n' +
             '• `/slacklords character story` - Muestra la historia de tu personaje\n' +
+            '• `/slacklords character kill` - Mata a tu personaje :(\n' +
             '• `/slacklords equipment` - Muestra el equipo de tu personaje\n' +
             '• `/slacklords help` - Muestra este mensaje de ayuda',
         },

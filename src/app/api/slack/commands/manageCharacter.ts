@@ -58,11 +58,11 @@ async function generateAndCreateCharacter(userId: string, channelId: string, bat
         text: {
           type: 'mrkdwn',
           text: `*Stats*
-          • Vitalidad: ${character.stats.vitality}
-          • Ataque: ${character.stats.attack}
-          • Defensa: ${character.stats.defense}
-          • Velocidad: ${character.stats.speed}
-          • Suerte: ${character.stats.luck}`,
+          • ❤️ *Vitalidad*: ${character.stats.vitality}
+          • 💥 *Ataque*: ${character.stats.attack}
+          • 🛡️ *Defensa*: ${character.stats.defense}
+          • 🏃 *Velocidad*: ${character.stats.speed}
+          • 🍀 *Suerte*: ${character.stats.luck}`,
         },
       },
     ],
@@ -84,19 +84,42 @@ async function respondCharacterView(character: SupabaseCharacter) {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Stats*
-          • Vitalidad: ${character.stats.vitality}
-          • Ataque: ${character.stats.attack}
-          • Defensa: ${character.stats.defense}
-          • Velocidad: ${character.stats.speed}
-          • Suerte: ${character.stats.luck}`,
+          text: `*Stats*`,
         },
       },
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: 'Para ver el equipo o la historia, usa `/slacklords character story`.',
+          text: `❤️ *Vitalidad*: ${character.stats.vitality}`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `💥 *Ataque*: ${character.stats.attack}`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🛡️ *Defensa*: ${character.stats.defense}`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🏃 *Velocidad*: ${character.stats.speed}`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🍀 *Suerte*: ${character.stats.luck}`,
         },
       },
     ],
@@ -111,8 +134,7 @@ async function respondCharacterStory(character: SupabaseCharacter) {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Historia de ${character.name}*
-          
+          text: `*Historia de ${character.name}*          
           ${character.story}`,
         },
       },
@@ -120,7 +142,42 @@ async function respondCharacterStory(character: SupabaseCharacter) {
   });
 }
 
-export default async function viewOrCreateCharacter(userId: string, channelId: string, argument: string) {
+async function respondCharacterKillAsk(character: SupabaseCharacter) {
+  return NextResponse.json({
+    response_type: 'ephemeral',
+    text: `¿Estás seguro de querer eliminar a ${character.name}?`,
+    blocks: [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `*¿Estás seguro de querer matar a ${character.name}?*` },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: 'Esto no se puede deshacer y se publicará un aviso del suicidio. Después de eliminarlo podrás crear un nuevo personaje.',
+        },
+      },
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: { type: 'plain_text', text: 'Sí, eliminarlo' },
+            action_id: `confirm-delete-character|${character.id}`,
+            style: 'danger',
+          },
+          {
+            type: 'button',
+            text: { type: 'plain_text', text: 'No, cancelar' },
+            action_id: 'cancel-delete-character',
+          },
+        ],
+      },
+    ],
+  });
+}
+export default async function manageCharacter(userId: string, channelId: string, argument: string) {
   const { data: battlefield, error } = await getBattlefield(channelId);
   if (error) return respondEphemeral('Error para obtener el campo de batalla');
   if (!battlefield) return respondEphemeral('No se encontró un campo de batalla. Por favor, configura un campo de batalla primero.');
@@ -134,6 +191,7 @@ export default async function viewOrCreateCharacter(userId: string, channelId: s
   }
 
   if (argument === 'story') return await respondCharacterStory(character);
+  if (argument === 'kill') return await respondCharacterKillAsk(character);
   if (!argument) return await respondCharacterView(character);
 
   return respondEphemeral('Argumento no reconocido. Por favor, usa `/slacklords character` para ver tu personaje.');

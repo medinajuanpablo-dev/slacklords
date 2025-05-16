@@ -9,7 +9,6 @@ export default async function handleDeleteBattlefield(channelId: string, actionI
 
   if (actionId === 'confirm-delete-battlefield') {
     const { error } = await removeBattlefield(channelId);
-
     if (error) return sendSlackResponse(responseUrl, { replace_original: 'true', text: 'Error al eliminar el campo de batalla.' });
 
     postSlackMessage({

@@ -51,6 +51,17 @@ export async function getCharacter(userId: string, battlefieldId: string) {
   return { data: data as SupabaseCharacter };
 }
 
+export async function getCharacterById(characterId: string) {
+  const { data, error } = await supabase.from('characters').select('*').eq('id', characterId).maybeSingle();
+
+  if (error) {
+    console.error('Error getting character', { error });
+    return { error };
+  }
+
+  return { data: data as SupabaseCharacter };
+}
+
 export async function createCharacter(userId: string, battlefieldId: string, characterGeneratedData: GeneratedCharacterData) {
   const { name, story, stats } = characterGeneratedData;
 
@@ -68,6 +79,14 @@ export async function createCharacter(userId: string, battlefieldId: string, cha
   const { error } = await supabase.from('characters').insert([data]);
 
   if (error) console.error('Error creating character', { error });
+
+  return { error };
+}
+
+export async function deleteCharacter(characterId: string) {
+  const { error } = await supabase.from('characters').delete().eq('id', characterId);
+
+  if (error) console.error('Error deleting character', { error });
 
   return { error };
 }
