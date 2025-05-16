@@ -5,6 +5,7 @@ import manageCharacter from './manageCharacter';
 import deleteBattlefield from './deleteBattlefield';
 import manageEquipment from './manageEquipment';
 import manageHelp from './manageHelp';
+import addItemsFromJSON from './addItems';
 
 const UNRECOGNIZED_RESPONSE = NextResponse.json({
   response_type: 'ephemeral',
@@ -34,6 +35,8 @@ export async function POST(req: NextRequest) {
     case 'equipment':
       return manageEquipment(userId, channelId);
 
+    case 'add-items-secret-AJWJ2912H##F':
+      return addItemsFromJSON();
     case 'help':
       return manageHelp();
 

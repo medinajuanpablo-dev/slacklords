@@ -113,6 +113,42 @@ export default async function manageEquipment(userId: string, channelId: string)
           },
         }),
       },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🪛 *Accesorio 1*: ${character.equipment.accessory1?.name || 'Vacío'}`,
+        },
+        ...(character.equipment.accessory1 && {
+          accessory: {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Quitar',
+              emoji: true,
+            },
+            value: 'change_accessory',
+          },
+        }),
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `🪛 *Accesorio 2*: ${character.equipment.accessory2?.name || 'Vacío'}`,
+        },
+        ...(character.equipment.accessory2 && {
+          accessory: {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Quitar',
+              emoji: true,
+            },
+            value: 'change_accessory',
+          },
+        }),
+      },
     ],
   });
 }

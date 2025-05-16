@@ -9,15 +9,36 @@ export type SupabaseBattlefield = {
   }[];
 };
 
+export enum ItemType {
+  HELMET = 'helmet',
+  WEAPON = 'weapon',
+  ARMOR = 'armor',
+  JEWEL = 'jewel',
+  CONSUMABLE = 'consumable',
+  ACCESSORY = 'accessory',
+}
+
 export type SupabaseItem = {
   id: string;
   created_at: string;
   name: string;
   description: string;
   effect_data: {
-    type: string;
+    type: ItemType;
+    modifying_stats_values?: Record<CharacterStat, number>;
+    modifying_stats_percentage?: Record<CharacterStat, number>;
+    hearts_addition?: number;
+    duration_days?: number; // Only for consumables
   };
 };
+
+export enum CharacterStat {
+  VITALITY = 'vitality',
+  ATTACK = 'attack',
+  DEFENSE = 'defense',
+  SPEED = 'speed',
+  LUCK = 'luck',
+}
 
 export type SupabaseCharacter = {
   id: string;
@@ -25,19 +46,15 @@ export type SupabaseCharacter = {
   name: string;
   story: string;
   hearts: number;
-  stats: {
-    vitality: number;
-    attack: number;
-    defense: number;
-    speed: number;
-    luck: number;
-  };
+  stats: Record<CharacterStat, number>;
   equipment: {
-    helmet: SupabaseItem;
-    armor: SupabaseItem;
-    weapon: SupabaseItem;
-    jewel1: SupabaseItem;
-    jewel2: SupabaseItem;
+    helmet: SupabaseItem | null;
+    armor: SupabaseItem | null;
+    weapon: SupabaseItem | null;
+    jewel1: SupabaseItem | null;
+    jewel2: SupabaseItem | null;
+    accessory1: SupabaseItem | null;
+    accessory2: SupabaseItem | null;
   };
   inventory: SupabaseItem[];
   is_available: boolean;
@@ -46,5 +63,5 @@ export type SupabaseCharacter = {
 export type GeneratedCharacterData = {
   name: string;
   story: string;
-  stats: { vitality: number; attack: number; defense: number; speed: number; luck: number };
+  stats: Record<CharacterStat, number>;
 };

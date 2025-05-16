@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { BASE_EQUIPMENT, BASE_HEARTS, SUPABASE_ANON_KEY, SUPABASE_URL } from '@/constants/constants';
-import { GeneratedCharacterData, SupabaseBattlefield, SupabaseCharacter } from '@/types/types';
+import { GeneratedCharacterData, SupabaseBattlefield, SupabaseCharacter, SupabaseItem } from '@/types/types';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -87,6 +87,14 @@ export async function deleteCharacter(characterId: string) {
   const { error } = await supabase.from('characters').delete().eq('id', characterId);
 
   if (error) console.error('Error deleting character', { error });
+
+  return { error };
+}
+
+export async function addItemsToDatabase(items: Partial<SupabaseItem>[]) {
+  const { error } = await supabase.from('items').insert(items);
+
+  if (error) console.error('Error adding items to database', { error });
 
   return { error };
 }

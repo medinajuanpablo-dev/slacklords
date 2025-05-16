@@ -1,0 +1,328 @@
+[
+  {
+    "name": "Corazón de Gallina",
+    "description": "A algunas personas les gusta comerlo en sopas o guisos. Sea como sea, es un corazón y restaura 1 corazón.",
+    "effect_data": {
+      "type": "consumable",
+      "hearts_addition": 1
+    }
+  },
+  {
+    "name": "Un palo de la calle",
+    "description": "Un palo de la calle. No, no puede resistirse a la tentación de levantarlo",
+    "effect_data": {
+      "type": "weapon",
+      "modifying_stats_values": {
+        "attack": 2,
+        "speed": 4,
+        "luck": 2
+      }
+    }
+  },
+  {
+    "name": "Gafas de Sol del Chino",
+    "description": "Unas gafas de sol que compraste en el chino. Se ve re copados, pero no protegen del sol.",
+    "effect_data": {
+      "type": "accessory",
+      "modifying_stats_values": {
+        "luck": 3,
+        "speed": -3
+      }
+    }
+  },
+  {
+    "name": "Pulsera de la Amistad",
+    "description": "Una pulsera hecha con hilos de colores que te regaló tu mejor amigo. Te recuerda los buenos años.",
+    "effect_data": {
+      "type": "accessory",
+      "modifying_stats_values": {
+        "vitality": 3,
+        "luck": 2
+      }
+    }
+  },
+  {
+    "name": "Café Expreso Doble",
+    "description": "Un café bien potente para una resaca o para un muerto. Te va a dar energía instantánea... y ansiedad.",
+    "effect_data": {
+      "type": "consumable",
+      "hearts_addition": -1,
+      "modifying_stats_values": {
+        "speed": 20
+      },
+      "duration_days": 1
+    }
+  },
+  {
+    "name": "Chaqueta de Cuero Falsa",
+    "description": "Una chaqueta que parece de cuero pero en realidad es de plástico, bastante impráctica la verdad. Al menos te hace parecer más duro.",
+    "effect_data": {
+      "type": "armor",
+      "modifying_stats_values": {
+        "defense": 3,
+        "speed": -2
+      }
+    }
+  },
+  {
+    "name": "Peluche de la Suerte",
+    "description": "Un peluche viejo y desgastado que siempre te ha traído buena suerte. No te atreves a separarte de él.",
+    "effect_data": {
+      "type": "jewel",
+      "modifying_stats_values": {
+        "luck": 5,
+        "attack": -1
+      }
+    }
+  },
+  {
+    "name": "Casco de Bicicleta",
+    "description": "Un casco de bicicleta que encontraste en la basura. No es muy elegante pero podría salvarte la vida... o al menos el pelo.",
+    "effect_data": {
+      "type": "helmet",
+      "modifying_stats_values": {
+        "defense": 4
+      }
+    }
+  },
+  {
+    "name": "Sombrero de Papel",
+    "description": "Un sombrero hecho de periódico viejo. Es muy frágil y te hace ver como un boludo. No es muy útil la verdad.",
+    "effect_data": {
+      "type": "helmet",
+      "modifying_stats_values": {
+        "luck": 1
+      }
+    }
+  },
+  {
+    "name": "Bastón de Abuelo",
+    "description": "El bastón de tu abuelo que heredaste. No es muy efectivo como arma pero tiene un valor sentimental incalculable.",
+    "effect_data": {
+      "type": "weapon",
+      "modifying_stats_values": {
+        "attack": 3,
+        "vitality": 3
+      }
+    }
+  },
+  {
+    "name": "Paraguas Roto",
+    "description": "Un paraguas que ya no sirve para la lluvia pero que podría servir como arma improvisada. Al menos es mejor que nada.",
+    "effect_data": {
+      "type": "weapon",
+      "modifying_stats_values": {
+        "attack": 2,
+        "speed": 1
+      }
+    }
+  },
+  {
+    "name": "Chaleco Salvavidas",
+    "description": "Un chaleco salvavidas robado de un avión. No protege mucho de nada pero sí desconcierta bastante",
+    "effect_data": {
+      "type": "armor",
+      "modifying_stats_values": {
+        "defense": 1,
+        "attack": 3
+      }
+    }
+  },
+  {
+    "name": "Bufanda de Lana",
+    "description": "Una bufanda tejida a mano que te regaló tu madre. Te mantiene abrigado y te da fuerzas para seguir adelante.",
+    "effect_data": {
+      "type": "armor",
+      "modifying_stats_values": {
+        "defense": 2,
+        "vitality": 5,
+        "luck": 2
+      }
+    }
+  },
+  {
+    "name": "Moneda de la Suerte",
+    "description": "Una moneda antigua que siempre llevás en la billetera aunque se te viva cayendo.",
+    "effect_data": {
+      "type": "jewel",
+      "modifying_stats_values": {
+        "luck": 4
+      }
+    }
+  },
+  {
+    "name": "Collar de Perlas Falsas",
+    "description": "Un collar de perlas que compraste en un chino en un impulso. Ahora solo queda arrepentimiento.",
+    "effect_data": {
+      "type": "jewel",
+      "modifying_stats_values": {
+        "luck": 3,
+        "defense": -1
+      }
+    }
+  },
+  {
+    "name": "La Coca",
+    "description": "Azucar líquida. Te da un subidón temporal pero luego te deja más cansado que antes.",
+    "effect_data": {
+      "type": "consumable",
+      "hearts_addition": -1,
+      "modifying_stats_values": {
+        "speed": 7,
+        "attack": 7,
+        "defense": 7,
+        "luck": -2
+      },
+      "duration_days": 1
+    }
+  },
+  {
+    "name": "Galleta de la Fortuna",
+    "description": "Una galleta que contiene un mensaje misterioso y muy ambiguo tipo 'Hoy pasarán cosas'. No es muy útil pero es una galleta.",
+    "effect_data": {
+      "type": "consumable",
+      "hearts_addition": 1,
+      "modifying_stats_values": {
+        "luck": 4
+      },
+      "duration_days": 1
+    }
+  },
+  {
+    "name": "Reloj de Bolsillo",
+    "description": "Un reloj antiguo que ya no anda pero te hace ver importante.",
+    "effect_data": {
+      "type": "accessory",
+      "modifying_stats_values": {
+        "defense": 3,
+        "vitality": 1
+      }
+    }
+  },
+  {
+    "name": "Casco de Obra",
+    "description": "Un casco de construcción que te pusiste para parecer duro aunque en realidad laburas en la oficina.",
+    "effect_data": {
+      "type": "helmet",
+      "modifying_stats_values": {
+        "defense": 6
+      }
+    }
+  },
+  {
+    "name": "Gorra de Darth Vader",
+    "description": "Una gorra con un dibujo de Darth Vader. Ahora estas del lado oscuro.",
+    "effect_data": {
+      "type": "helmet",
+      "modifying_stats_values": {
+        "defense": -5,
+        "attack": 10
+      }
+    }
+  },
+  {
+    "name": "Espada de Madera",
+    "description": "Una espada de madera que te hiciste en el taller de carpintería. No corta nada pero pega duro y es muy maniobrable.",
+    "effect_data": {
+      "type": "weapon",
+      "modifying_stats_values": {
+        "attack": 3,
+        "speed": 5
+      }
+    }
+  },
+  {
+    "name": "Chumbo Casero",
+    "description": "Un arma que te armaste con caños y gomas. Tardas 5 días hábiles en recargarla pero que no se te crucen en frente",
+    "effect_data": {
+      "type": "weapon",
+      "modifying_stats_values": {
+        "attack": 15,
+        "speed": -15
+      }
+    }
+  },
+  {
+    "name": "Campera de Cuero",
+    "description": "Una campera que te compraste en Once. Es de cuero sintético pero te hace ver re fachero.",
+    "effect_data": {
+      "type": "armor",
+      "modifying_stats_values": {
+        "defense": 2,
+        "vitality": 5,
+        "luck": 5
+      }
+    }
+  },
+  {
+    "name": "Chaleco Antibalas",
+    "description": "Chaleco que le robaste a tu tío de la fuerza. No sabés ponértelo muy bien pero sí que se banca todo.",
+    "effect_data": {
+      "type": "armor",
+      "modifying_stats_values": {
+        "defense": 12,
+        "speed": -5
+      }
+    }
+  },
+  {
+    "name": "Anillo de Compromiso",
+    "description": "Un anillo que te quedó de una relación fallida. Te hace ver mejor y te da suerte pero te hace llorar.",
+    "effect_data": {
+      "type": "jewel",
+      "modifying_stats_values": {
+        "vitality": 5,
+        "luck": 5,
+        "defense": -8
+      }
+    }
+  },
+  {
+    "name": "Collar de Dientes",
+    "description": "Un collar que te hiciste con los dientes que te sacó el dentista. Te hace ver más intimidante.",
+    "effect_data": {
+      "type": "jewel",
+      "modifying_stats_values": {
+        "attack": 5,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "name": "Fernet con Coca",
+    "description": "La bebida nacional. Te da ánimos de cualquier cosa y no te frena nada. Ah pero mañana...",
+    "effect_data": {
+      "type": "consumable",
+      "hearts_addition": -1,
+      "modifying_stats_values": {
+        "attack": 10,
+        "defense": 10,
+        "speed": -3
+      },
+      "duration_days": 1
+    }
+  },
+  {
+    "name": "Docena de empanadas",
+    "description": "No tenías que comerte la docena entera vos solo.",
+    "effect_data": {
+      "type": "consumable",
+      "hearts_addition": 2,
+      "modifying_stats_values": {
+        "speed": -10
+      },
+      "duration_days": 1
+    }
+  },
+  {
+    "name": "Mochila de la Secundaria",
+    "description": "Una mochila que te quedó del colegio. Te permite cargar más cosas pero te hace más lento.",
+    "effect_data": {
+      "type": "accessory",
+      "modifying_stats_values": {
+        "vitality": 5,
+        "speed": -1
+      }
+    }
+  }
+]
