@@ -17,7 +17,7 @@ export default async function manageHelp() {
             '• `/slacklords character kill` - Mata a tu personaje :(\n' +
             '• `/slacklords equipment` - Muestra el equipo de tu personaje\n' +
             '• `/slacklords store` - Muestra el store actual y te permite comprar items\n' +
-            '• `/slacklords store update` - Actualiza el store. Disponible cada 12 horas\n' +
+            '• `/slacklords store update` - Actualiza el store. Disponible cada 24 horas\n' +
             '• `/slacklords help` - Muestra este mensaje de ayuda',
         },
       },

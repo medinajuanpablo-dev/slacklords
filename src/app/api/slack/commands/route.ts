@@ -35,7 +35,6 @@ export async function POST(req: NextRequest) {
       return manageCharacter(userId, channelId, secondArgument);
     case 'equipment':
       return manageEquipment(userId, channelId);
-
     case 'store':
       return manageStore(userId, channelId, secondArgument);
 

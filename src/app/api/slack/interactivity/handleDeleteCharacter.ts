@@ -22,7 +22,7 @@ export default async function handleDeleteCharacter(channelId: string, actionId:
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*⚠️ TRAGEDIA! ⚠️*\n\n *${character.name}* no soportó y eligió el camino de su propia destrucción ☠ No lo veremos más por aquí.`,
+            text: `*⚠️ TRAGEDIA! ⚠️*\n\n *${character.name}* de <@${character.user_id}> no soportó y eligió el camino de su propia destrucción ☠ No l@ veremos más por aquí.`,
           },
         },
       ],

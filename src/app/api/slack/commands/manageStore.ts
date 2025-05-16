@@ -1,6 +1,6 @@
 import { STATS_EMOJIES, TYPES_EMOJIES } from '@/constants/constants';
 import { postSlackEphemeral, postSlackMessage } from '@/lib/slack';
-import { getBattlefield, getItems, updateBattlefieldStore } from '@/lib/supabase';
+import { getBattlefield, getCharacter, getItems, updateBattlefieldStore } from '@/lib/supabase';
 import { respondEphemeral } from '@/lib/utils';
 import { ItemType, StoreItems, SupabaseBattlefield, SupabaseItem } from '@/types/types';
 import { NextResponse } from 'next/server';
@@ -69,7 +69,7 @@ async function updateStore(userId: string, channelId: string, battlefield: Supab
       },
       {
         type: 'section',
-        text: { type: 'mrkdwn', text: 'Nuevos items disponibles. Envía `/slacklords store` para ver y comprar.' },
+        text: { type: 'mrkdwn', text: 'Nuevos items disponibles. Mandá `/slacklords store` para ver y comprar.' },
       },
     ],
   });
@@ -126,7 +126,7 @@ function showStoreList(battlefield: SupabaseBattlefield, userId: string) {
                           .map(
                             ([stat, value]) => `*${value > 0 ? '+' : ''}${value}* ${STATS_EMOJIES[stat as keyof typeof STATS_EMOJIES]}`
                           )
-                          .join(' | ')}\n\n`
+                          .join(' | ')} ${storeItem.item.effect_data.type === ItemType.CONSUMABLE ? '_TEMPORAL_' : ''}\n\n`
                       : ''
                   }_${storeItem.item.description}_`,
                 },
@@ -151,8 +151,12 @@ function showStoreList(battlefield: SupabaseBattlefield, userId: string) {
 
 export default async function manageStore(userId: string, channelId: string, secondArgument: string) {
   const { data: battlefield, error: getError } = await getBattlefield(channelId);
-  if (getError) return respondEphemeral('Error getting battlefield');
-  if (!battlefield) return respondEphemeral('No battlefield found');
+  if (getError) return respondEphemeral('Error al obtener el battlefield');
+  if (!battlefield) return respondEphemeral('No se encontró battlefield, crea uno primero con `/slacklords battlefield set`');
+
+  const { data: character, error: getCharacterError } = await getCharacter(userId, battlefield.id);
+  if (getCharacterError) return respondEphemeral('Error al obtener el personaje');
+  if (!character) return respondEphemeral('No se encontró personaje, crea uno primero con `/slacklords character`');
 
   console.log('Battlefield', battlefield);
 
@@ -162,15 +166,15 @@ export default async function manageStore(userId: string, channelId: string, sec
   const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
 
   if (secondArgument === 'update') {
-    if (diffHours > 12) {
+    if (diffHours > 24) {
       updateStore(userId, channelId, battlefield);
-      return respondEphemeral('Updating Store...');
+      return respondEphemeral('Actualizando store...');
     }
 
-    return respondEphemeral(`Store already updated today, wait another ${12 - diffHours} hours`);
+    return respondEphemeral(`Store ya actualizado hoy. Faltan ${24 - diffHours} horas para poder actualizarlo de nuevo.`);
   }
 
   if (!secondArgument) return showStoreList(battlefield, userId);
 
-  return respondEphemeral('Invalid argument');
+  return respondEphemeral('Argumento inválido');
 }

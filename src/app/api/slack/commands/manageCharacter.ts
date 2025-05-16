@@ -57,12 +57,7 @@ async function generateAndCreateCharacter(userId: string, channelId: string, bat
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Stats*
-          • ❤️ *Vitalidad*: ${character.stats.vitality}
-          • 💥 *Ataque*: ${character.stats.attack}
-          • 🛡️ *Defensa*: ${character.stats.defense}
-          • 🏃 *Velocidad*: ${character.stats.speed}
-          • 🍀 *Suerte*: ${character.stats.luck}`,
+          text: `*Estadísticas*\n• ❤️ *Vitalidad*: ${character.stats.vitality}\n• 💥 *Ataque*: ${character.stats.attack}\n• 🛡️ *Defensa*: ${character.stats.defense}\n• 🏃 *Velocidad*: ${character.stats.speed}\n• 🍀 *Suerte*: ${character.stats.luck}`,
         },
       },
     ],
@@ -183,7 +178,7 @@ export default async function manageCharacter(userId: string, channelId: string,
 
   if (!character) {
     generateAndCreateCharacter(userId, channelId, battlefield.id);
-    return respondEphemeral('No se encontró un personaje. Creando personaje...');
+    return respondEphemeral('No se encontró un personaje. Creando uno...');
   }
 
   if (argument === 'story') return await respondCharacterStory(character);

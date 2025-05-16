@@ -63,6 +63,7 @@ export type SupabaseCharacter = {
   inventory: SupabaseItem[];
   is_available: boolean;
   gold: number;
+  user_id: string;
 };
 
 export type GeneratedCharacterData = {
