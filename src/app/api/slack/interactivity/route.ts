@@ -20,6 +20,9 @@ export async function POST(req: NextRequest) {
     if (actionId.includes('delete-character')) {
       return await handleDeleteCharacter(payload.channel.id, actionId, payload.response_url);
     }
+    if (actionId.includes('buy-item')) {
+      return await handleBuyItem(payload.channel.id, actionId, payload.response_url);
+    }
   }
 
   return NextResponse.json({ status: 'ignored' });

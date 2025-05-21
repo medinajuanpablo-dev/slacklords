@@ -1,12 +1,9 @@
-import { getBattlefield } from '@/lib/supabase';
-import { respondEphemeral } from '@/lib/utils';
+import { getAndControlBattlefield, respondEphemeral } from '@/lib/utils';
 import { NextResponse } from 'next/server';
 
 export default async function deleteBattlefield(channelId: string) {
-  const { data: battlefield, error: getError } = await getBattlefield(channelId);
-
-  if (getError) return respondEphemeral('Error para obtener el campo de batalla.');
-  if (!battlefield) return respondEphemeral('No se encontró un campo de batalla en este canal.');
+  const { problemMessage: getBattlefieldProblemMessage } = await getAndControlBattlefield(channelId);
+  if (getBattlefieldProblemMessage) return respondEphemeral(getBattlefieldProblemMessage);
 
   return NextResponse.json({
     response_type: 'ephemeral',

@@ -1,15 +1,13 @@
 import { postSlackMessage } from '@/lib/slack';
-import { createBattlefield, getBattlefield } from '@/lib/supabase';
-import { respondEphemeral } from '@/lib/utils';
+import { createBattlefield } from '@/lib/supabase';
+import { getAndControlBattlefield, respondEphemeral } from '@/lib/utils';
 import { NextResponse } from 'next/server';
 
 export default async function setBattlefield(channelId: string) {
-  const { data: battlefield, error: getError } = await getBattlefield(channelId);
-  if (getError) return respondEphemeral('Error para obtener el campo de batalla.');
-  if (battlefield) return respondEphemeral('Ya hay un campo de batalla configurado en este canal.');
+  const { problemMessage: getBattlefieldProblemMessage } = await getAndControlBattlefield(channelId, true);
+  if (getBattlefieldProblemMessage) return respondEphemeral(getBattlefieldProblemMessage);
 
   const { error: createError } = await createBattlefield(channelId);
-
   if (createError) return respondEphemeral('Error para configurar el campo de batalla.');
 
   postSlackMessage({

@@ -7,6 +7,7 @@ import manageEquipment from './manageEquipment';
 import manageHelp from './manageHelp';
 import addItemsFromJSON from './addItems';
 import manageStore from './manageStore';
+import { manageInventory } from './manageInventory';
 
 const UNRECOGNIZED_RESPONSE = NextResponse.json({
   response_type: 'ephemeral',
@@ -37,6 +38,8 @@ export async function POST(req: NextRequest) {
       return manageEquipment(userId, channelId);
     case 'store':
       return manageStore(userId, channelId, secondArgument);
+    case 'inventory':
+      return manageInventory(userId, channelId);
 
     case 'add-items-secret-AJWJ2912H##F':
       return addItemsFromJSON();

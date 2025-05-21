@@ -1,8 +1,8 @@
 import { GENERATE_CHARACTER_PROMPT } from '@/constants/prompts';
 import { askAssitant } from '@/lib/openai';
 import { postSlackEphemeral, postSlackMessage } from '@/lib/slack';
-import { getBattlefield, getCharacter, createCharacter } from '@/lib/supabase';
-import { respondEphemeral } from '@/lib/utils';
+import { createCharacter } from '@/lib/supabase';
+import { getAndControlBattlefieldAndCharacter, respondEphemeral } from '@/lib/utils';
 import { GeneratedCharacterData, SupabaseCharacter } from '@/types/types';
 import { NextResponse } from 'next/server';
 
@@ -68,9 +68,6 @@ async function respondCharacterView(character: SupabaseCharacter) {
   return NextResponse.json({
     response_type: 'ephemeral',
     blocks: [
-      {
-        type: 'divider',
-      },
       {
         type: 'section',
         text: {
@@ -169,12 +166,8 @@ async function respondCharacterKillAsk(character: SupabaseCharacter) {
   });
 }
 export default async function manageCharacter(userId: string, channelId: string, argument: string) {
-  const { data: battlefield, error } = await getBattlefield(channelId);
-  if (error) return respondEphemeral('Error para obtener el campo de batalla');
-  if (!battlefield) return respondEphemeral('No se encontró un campo de batalla. Por favor, configura un campo de batalla primero.');
-
-  const { data: character, error: getError } = await getCharacter(userId, battlefield.id);
-  if (getError) return respondEphemeral('Error para obtener el personaje.');
+  const { character, battlefield, problemMessage } = await getAndControlBattlefieldAndCharacter(userId, channelId);
+  if (problemMessage) return respondEphemeral(problemMessage);
 
   if (!character) {
     generateAndCreateCharacter(userId, channelId, battlefield.id);
